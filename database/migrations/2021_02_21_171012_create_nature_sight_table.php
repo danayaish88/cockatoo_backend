@@ -17,7 +17,7 @@ class CreateNatureSightTable extends Migration
             $table->string('nature_name');
             $table->unsignedBigInteger('sight_id');
             $table->foreign('nature_name')
-                          ->references('name')->on('cultures')
+                          ->references('name')->on('natures')
                           ->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('sight_id')
                           ->references('id')->on('sights')

@@ -22,7 +22,9 @@ class CreateEntertainmentsTable extends Migration
             $table->double('rating',2,1)->nullable();
             $table->string('link')->nullable();
             $table->text('details')->nullable();
-            $table->string('type');
+            $table->string('type')->nullable();
+            $table->json('image_id')->nullable();
+
             $table->timestamps();
         });
     }

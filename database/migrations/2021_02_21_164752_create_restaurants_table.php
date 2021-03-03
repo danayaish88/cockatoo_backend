@@ -23,6 +23,7 @@ class CreateRestaurantsTable extends Migration
             $table->string('link')->nullable();
             $table->text('details')->nullable();
             $table->string('type')->nullable();
+            $table->json('image_id')->nullable();
             $table->timestamps();
         });
     }

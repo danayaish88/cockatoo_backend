@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use HasFactory, Notifiable;
 
@@ -20,6 +20,8 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'api_token',
+        'location',
     ];
 
     /**
@@ -40,4 +42,42 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    
+    public function routes(){
+        return $this->hasMany(Route::class);
+    }
+
+    /*
+    Bookmarks
+    */
+    public function restaurants(){
+        return $this->belongsToMany(Restaurant::class);
+    }
+
+    public function sights(){
+        return $this->belongsToMany(Sight::class);
+    }
+
+    public function entertainments(){
+        return $this->belongsToMany(Entertainment::class);
+    }
+
+
+    /*
+    interests
+    */
+
+    public function cultures(){
+        return $this->belongsToMany(Culture::class, 'culture_user', 'user_id', 'culture_name');
+    }
+
+    public function cuisines(){
+        return $this->belongsToMany(Cuisine::class, 'cuisine_user', 'user_id', 'cuisine_name');
+    }
+
+    public function natures(){
+        return $this->belongsToMany(Nature::class, 'nature_user', 'user_id', 'nature_name');
+    }
+
 }

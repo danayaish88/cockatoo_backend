@@ -58,6 +58,22 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                
+                                    <a class="dropdown-item" href="{{route('natures')}}">
+                
+                                        {{__('Natures')  }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{route('cuisines')}}">
+                
+                                        {{__('Cuisines')  }}
+                                    </a>
+
+                                    <a class="dropdown-item" href="{{route('cultures')}}">
+                
+                                        {{__('Cultures')  }}
+                                    </a>
+
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
@@ -75,7 +91,7 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="container">
             @yield('content')
         </main>
     </div>

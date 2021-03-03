@@ -1,0 +1,31 @@
+<?php
+
+namespace App\Http\Resources;
+
+use Illuminate\Http\Resources\Json\JsonResource;
+
+class RestaurantResource extends JsonResource
+{
+    /**
+     * Transform the resource into an array.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return array
+     */
+    public function toArray($request)
+    {
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'city' => $this->city,
+            'country' => $this->country,
+            'rating' => $this->rating,
+            'descprition' => $this->details,
+            'location' => $this->location,
+            'link' => $this->link,
+            'image_id' => $this->image_id,
+            'type' => $this->type,
+            'cuisines' => CuisineResource::collection($this->cuisines)
+        ];
+    }
+}

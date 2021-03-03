@@ -22,6 +22,7 @@ class CreatePlacesTable extends Migration
             $table->double('rating',2,1)->nullable();
             $table->string('link')->nullable();
             $table->string('category')->nullable();
+            $table->json('image_id')->nullable();
             $table->timestamps();
         });
     }
