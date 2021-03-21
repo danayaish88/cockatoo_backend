@@ -8,6 +8,11 @@ use App\Http\Controllers\Api\CultureApiController;
 use App\Http\Controllers\Api\RestaurantApiController;
 use App\Http\Controllers\Api\SightApiController;
 use App\Http\Controllers\Api\EntertainmentApiController;
+use App\Http\Controllers\Api\PlaceApiController;
+use App\Models\User;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
+use App\Http\Controllers\AuthController;
 
 
 /*
@@ -32,8 +37,20 @@ Route::get('restaurants', [RestaurantApiController::class, 'index']);
 Route::get('sights', [SightApiController::class, 'index']);
 
 Route::get('entertainments', [EntertainmentApiController::class, 'index']);
+Route::get('entertainments/{id}', [EntertainmentApiController::class, 'show']);
+
+Route::get('hotels', [PlaceApiController::class, 'indexHotels']);
 
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::group(['middleware' => ['auth:sanctum']], function () {
+    Route::get('/user', function(Request $request) {
+        return auth()->user();
+    });
+
+    Route::post('/auth/logout', [AuthController::class, 'logout']);
 });
+
+
+Route::post('/auth/login', [AuthController::class, 'login']);
+
+

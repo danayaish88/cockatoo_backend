@@ -20,6 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('api_token', 60)->unique();                //for security 
             $table->string('password');
             $table->json('location')->nullable();
+            $table->string('country');
+            $table->date('birthday');
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();                    //when a user selects remember me when logging in 
             $table->timestamps();

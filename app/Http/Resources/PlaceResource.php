@@ -15,15 +15,15 @@ class PlaceResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'place_id' => $this->id,
-            'place_name' => $this->name,
-            'place_city' => $this->city,
-            'place_country' => $this->country,
-            'place_rating' => $this->rating,
-            'place_location' => $this->location,
-            'place_link' => $this->link,
-            'place_image_id' => $this->image_id,
-            'place_category' => $this->category
+            'id' => $this->id,
+            'name' => $this->name,
+            'city' => $this->city,
+            'country' => $this->country,
+            'rating' => $this->rating,
+            'location' => $this->location,
+            'link' => $this->link,
+            'image_id' => $this->image_id,
+            'category' => $this->category
         ];
     }
 }

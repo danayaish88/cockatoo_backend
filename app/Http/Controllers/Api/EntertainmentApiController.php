@@ -13,4 +13,9 @@ class EntertainmentApiController extends Controller
         $entertainments = Entertainment::paginate();
         return EntertainmentResource::collection($entertainments);
     }
+
+    public function show($id){
+        return Entertainment::find($id);
+    }
+
 }
