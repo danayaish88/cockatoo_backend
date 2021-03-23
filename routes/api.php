@@ -12,7 +12,7 @@ use App\Http\Controllers\Api\PlaceApiController;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Api\AuthController;
 
 
 /*
@@ -52,5 +52,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 
 
 Route::post('/auth/login', [AuthController::class, 'login']);
+
+Route::post('/auth/register', [AuthController::class, 'register']);
+
 
 
