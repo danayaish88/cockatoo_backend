@@ -9,10 +9,13 @@ use App\Http\Controllers\Api\RestaurantApiController;
 use App\Http\Controllers\Api\SightApiController;
 use App\Http\Controllers\Api\EntertainmentApiController;
 use App\Http\Controllers\Api\PlaceApiController;
+use App\Http\Controllers\Api\UserDataController;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\ChangePasswordController;
+
 
 
 /*
@@ -46,6 +49,14 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/user', function(Request $request) {
         return auth()->user();
     });
+
+    Route::put('/user', [UserDataController::class, 'setCountryAndBirthday']);
+
+    Route::put('/user/data', [UserDataController::class, 'setCountryAndBirthday']);
+    Route::put('/user/edit', [UserDataController::class, 'editInfo']);
+    Route::put('/user/editEmail', [UserDataController::class, 'editEmail']);
+    Route::post('/user/change-password', [ChangePasswordController::class, 'store']);
+
 
     Route::post('/auth/logout', [AuthController::class, 'logout']);
 });
