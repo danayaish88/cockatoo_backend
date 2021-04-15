@@ -15,6 +15,9 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\ChangePasswordController;
+use Illuminate\Support\Facades\Password;
+use App\Http\Controllers\Api\ForgotPasswordController;
+use App\Http\Controllers\Api\ResetPasswordController;
 
 
 
@@ -65,6 +68,17 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
 Route::post('/auth/login', [AuthController::class, 'login']);
 
 Route::post('/auth/register', [AuthController::class, 'register']);
+
+// needs email only, sends a code by email
+Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail']);
+
+// needs code, returns a token if code is valid to use it in resetting password
+Route::post('/forgot-password/code', [ForgotPasswordController::class, 'validatePasswordResetToken']);
+
+//need password token, new password ,new password confirmation and email
+Route::post('/reset-password', [ResetPasswordController::class, 'setNewAccountPassword']);
+
+
 
 
 

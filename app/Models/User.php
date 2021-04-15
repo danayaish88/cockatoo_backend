@@ -7,10 +7,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Contracts\Auth\CanResetPassword;
+use App\Notifications\APIPasswordResetNotification;
+use Illuminate\Support\Str;
+use DB;
+use Carbon\Carbon;
 
-class User extends Authenticatable implements MustVerifyEmail
+
+class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
 {
     use HasFactory, Notifiable, HasApiTokens;
+    public $error_message = "";
 
     /**
      * The attributes that are mass assignable.
@@ -82,5 +89,40 @@ class User extends Authenticatable implements MustVerifyEmail
     public function natures(){
         return $this->belongsToMany(Nature::class, 'nature_user', 'user_id', 'nature_name');
     }
+
+    /**
+ * Send a password reset notification to the user.
+ *
+ * @param  string  $token
+ * @return void
+ */
+public function sendPasswordResetToken()
+{
+    do{
+        $token = Str::random(8);
+        $signature = hash('md5', $token);
+        $exists = DB::table('password_resets')->where([
+            ["user_email", $this->email],
+            ['token', $signature]
+        ])->exists();
+    }while($exists);
+
+    try{
+        $this->notify(new APIPasswordResetNotification($token));
+        return DB::table('password_resets')->updateOrInsert([
+            "user_email" => $this->email,
+            "token" =>$signature,
+            "expires_at" => Carbon::now()->addMinutes(30),
+        ]);
+    }catch(Throwable $th){
+        $this->error_message = $th->getMessage();
+        return false;
+    }
+    
+}
+
+public function getErrorMessage(){
+    return $error_message;
+}
 
 }
