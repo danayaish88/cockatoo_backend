@@ -79,7 +79,7 @@ class ForgotPasswordController extends Controller
         $resetToken = PasswordReset::where([
             ['token', hash('md5', $request->password_reset_code)],
             ['token_type', 10], // 10 is: password reset token
-            ['user_email', $request->user_email]
+            ['user_email', $request->email]
         ])->first();
 
         if($resetToken == null){
@@ -108,7 +108,7 @@ class ForgotPasswordController extends Controller
            
             $response = [
                 'error'    => false,
-                'message' => '',
+                'message' => 'code is correct',
                 'token' => $reset_token,
             ];
             return json_encode($response);

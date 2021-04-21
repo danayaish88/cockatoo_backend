@@ -79,15 +79,15 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
     */
 
     public function cultures(){
-        return $this->belongsToMany(Culture::class, 'culture_user', 'user_id', 'culture_name');
+        return $this->belongsToMany(Culture::class, 'culture_user', 'user_id', 'culture_name')->withTimestamps();
     }
 
     public function cuisines(){
-        return $this->belongsToMany(Cuisine::class, 'cuisine_user', 'user_id', 'cuisine_name');
+        return $this->belongsToMany(Cuisine::class, 'cuisine_user', 'user_id', 'cuisine_name')->withTimestamps();
     }
 
     public function natures(){
-        return $this->belongsToMany(Nature::class, 'nature_user', 'user_id', 'nature_name');
+        return $this->belongsToMany(Nature::class, 'nature_user', 'user_id', 'nature_name')->withTimestamps();
     }
 
     /**

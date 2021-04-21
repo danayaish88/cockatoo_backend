@@ -59,6 +59,9 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::put('/user/edit', [UserDataController::class, 'editInfo']);
     Route::put('/user/editEmail', [UserDataController::class, 'editEmail']);
     Route::post('/user/change-password', [ChangePasswordController::class, 'store']);
+    Route::post('user/cuisines', [CuisineApiController::class, 'store']);
+    Route::post('user/natures', [NatureApiController::class, 'store']);
+    Route::post('user/cultures', [CultureApiController::class, 'store']);
 
 
     Route::post('/auth/logout', [AuthController::class, 'logout']);
@@ -72,7 +75,7 @@ Route::post('/auth/register', [AuthController::class, 'register']);
 // needs email only, sends a code by email
 Route::post('/forgot-password', [ForgotPasswordController::class, 'sendResetLinkEmail']);
 
-// needs code, returns a token if code is valid to use it in resetting password
+// needs code & email, returns a token if code is valid to use it in resetting password
 Route::post('/forgot-password/code', [ForgotPasswordController::class, 'validatePasswordResetToken']);
 
 //need password token, new password ,new password confirmation and email

@@ -34,7 +34,7 @@ class ResetPasswordController extends Controller
 
     public function setNewAccountPassword(Request $request){
         $rules = [
-            'user_email' =>'required|email|exists:users,email',
+            'email' =>'required|email|exists:users,email',
             'password_token' => 'required|string|max:8',
             'password' => 'required|confirmed|string|max:45'
         ];
@@ -42,7 +42,7 @@ class ResetPasswordController extends Controller
         $Validator = Validator::make($request->all(), $rules);
 
         if($Validator->fails()){
-            return $this->errorMessage(true, $Validator->errors()->all());
+            return $this->sendResponse(true, $Validator->errors()->all());
         }
 
         $data = $Validator->validated();
@@ -50,7 +50,7 @@ class ResetPasswordController extends Controller
         $VerifToken = PasswordReset::where([
             ['token', hash('md5', $data['password_token'])],
             ['token_type', 20], // 20 is: password verif token
-            ['user_email', $request->user_email]
+            ['user_email', $request->email]
         ])->first();
 
         if($VerifToken == null){
@@ -58,7 +58,7 @@ class ResetPasswordController extends Controller
         }
 
         $user = User::where([
-            ['email', $request->user_email],
+            ['email', $request->email],
         ])->first();
 
         if($user == null){
@@ -74,7 +74,7 @@ class ResetPasswordController extends Controller
         $VerifToken->expires_at = Carbon::now();
         $VerifToken->save();
 
-        return $this->sendResponse(false, 'success');
+        return $this->sendResponse(false, 'success', $user);
     }
 
     public function sendResponse($error, $result, $user ='')
