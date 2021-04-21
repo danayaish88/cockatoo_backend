@@ -19,9 +19,9 @@ class NatureApiController extends BaseApiController
 
     public function store(Request $request){
         $user = User::find($request->user()->id);
-        $user->natures()->attach($request->natures);
-        return $this->sendResponse([
+        $user->natures()->sync($request->natures);
+        return $this->sendResponse(
             NatureResource::collection($user->natures)
-        ]); 
+        ); 
     }
 }

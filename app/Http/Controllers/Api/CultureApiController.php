@@ -19,9 +19,9 @@ class CultureApiController extends BaseApiController
 
     public function store(Request $request){
         $user = User::find($request->user()->id);
-        $user->cultures()->attach($request->cultures);
-        return $this->sendResponse([
+        $user->cultures()->sync($request->cultures);
+        return $this->sendResponse(
             CultureResource::collection($user->cultures)
-        ]); 
+        ); 
     }
 }

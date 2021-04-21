@@ -19,9 +19,9 @@ class CuisineApiController extends BaseApiController
 
     public function store(Request $request){
         $user = User::find($request->user()->id);
-        $user->cuisines()->attach($request->cuisines);
-        return $this->sendResponse([
+        $user->cuisines()->sync($request->cuisines);
+        return $this->sendResponse(
             CuisineResource::collection($user->cuisines)
-        ]); 
+        ); 
     }
 }
