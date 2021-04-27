@@ -10,8 +10,6 @@ use App\Http\Controllers\CuisineController;
 use App\Http\Controllers\CultureController;
 use App\Http\Controllers\UserController;
 
-
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -35,9 +33,12 @@ Route::get('/user/logout',[UserController::class, 'logout']);
 
 Auth::routes();
 
+Route::get('/user/stories', function () {
+    return view('user_views.stories');
+})->middleware(['auth'])->name('stories');
 
 
-Route::middleware(['auth'])->group( function(){
+/*Route::middleware(['auth'])->group( function(){
 
     Route::view('/user/stories', 'user_views.stories');
 
@@ -71,36 +72,9 @@ Route::middleware(['auth'])->group( function(){
     Route::post('natures', [NatureController::class, 'store'])->name('save_nature');
 
 });
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-/*
-this route will return a view instructing the user to click the email 
-verification link that was emailed to them by Laravel after registration
 */
-Route::get('/email/verify', function () {
-    return view('auth.verify-email');
-})->middleware('auth')->name('verification.notice');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
-
-/*
-this route will handle requests generated when the user clicks the
- email verification link that was emailed to them
-*/
-Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-
-    /*This method will call the markEmailAsVerified method on the 
-    authenticated user and dispatch the Illuminate\Auth\Events\Verified event.*/
-    $request->fulfill();             
-
-    return redirect('/home');
-})->middleware(['auth', 'signed'])->name('verification.verify');
-
-/*
- a route to allow the user to request that the verification email be resent.
-*/
-Route::post('/email/verification-notification', function (Request $request) {
-    $request->user()->sendEmailVerificationNotification();
-
-    return back()->with('message', 'Verification link sent!');
-})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
+require __DIR__.'/auth.php';
