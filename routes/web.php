@@ -8,6 +8,8 @@ use App\Http\Controllers\SightController;
 use App\Http\Controllers\NatureController;
 use App\Http\Controllers\CuisineController;
 use App\Http\Controllers\CultureController;
+use App\Http\Controllers\UserController;
+
 
 
 /*
@@ -21,15 +23,25 @@ use App\Http\Controllers\CultureController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
+Route::view('/', 'welcome');
+Route::view('/user/login-view', 'user_views.login');
+
+Route::post('/user/login', [UserController::class, 'login']);
+
+Route::get('/user/logout',[UserController::class, 'logout']);
+
+
 
 Auth::routes();
 
 
 
 Route::middleware(['auth'])->group( function(){
+
+    Route::view('/user/stories', 'user_views.stories');
+
+    
     Route::get('sights', [SightController::class, 'index']);
     Route::post('sights', [SightController::class, 'store'])->name('save-sight');
     Route::get('sights/{id}', [SightController::class, 'show']);

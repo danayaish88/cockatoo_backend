@@ -18,6 +18,7 @@ use App\Http\Controllers\ChangePasswordController;
 use Illuminate\Support\Facades\Password;
 use App\Http\Controllers\Api\ForgotPasswordController;
 use App\Http\Controllers\Api\ResetPasswordController;
+use App\Http\Controllers\Api\StoryApiController;
 
 
 
@@ -62,6 +63,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('user/cuisines', [CuisineApiController::class, 'store']);
     Route::post('user/natures', [NatureApiController::class, 'store']);
     Route::post('user/cultures', [CultureApiController::class, 'store']);
+    Route::post('user/save-story', [StoryApiController::class, 'store']);
+    Route::get('user/stories', [StoryApiController::class, 'index']);
 
 
     Route::post('/auth/logout', [AuthController::class, 'logout']);

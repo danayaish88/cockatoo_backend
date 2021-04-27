@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class ImageApiController extends Controller
 {
-    //
+    public function store(Request $request){
+        $image = create::Image($request->all());
+        return ('success');
+    }
 }

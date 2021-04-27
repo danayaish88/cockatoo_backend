@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateImagesTable extends Migration
+class CreateStoriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateImagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('images', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->foreignId('story_id');
-            $table->text('description');
-            $table->string('url');
-            $table->double('lat');
-            $table->double('lan');
+        Schema::create('stories', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id');
+            $table->string('name');
+            $table->json('points');
+            $table->string('city');
+            $table->string('country');
             $table->timestamps();
         });
     }
@@ -31,6 +31,6 @@ class CreateImagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('images');
+        Schema::dropIfExists('stories');
     }
 }

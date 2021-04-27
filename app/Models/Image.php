@@ -9,7 +9,9 @@ class Image extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['description', 'url'];
+    protected $fillable = ['description', 'url', 'lat', 'lan'];
 
-    
+    public function story(){
+        return $this->belongsTo(Story::class);
+    }
 }

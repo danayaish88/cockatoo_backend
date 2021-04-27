@@ -12,6 +12,7 @@ use App\Notifications\APIPasswordResetNotification;
 use Illuminate\Support\Str;
 use DB;
 use Carbon\Carbon;
+use App\Models\Story;
 
 
 class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
@@ -54,8 +55,8 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
     ];
 
     
-    public function routes(){
-        return $this->hasMany(Route::class);
+    public function stories(){
+        return $this->hasMany(Story::class);
     }
 
     /*
