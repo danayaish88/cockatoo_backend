@@ -20,8 +20,8 @@ class StoryResource extends JsonResource
             'points' => $this->points,
             'city' => $this->city,
             'country' => $this->country,
+            'dateCreated' => $this->dateCreated,
             'images' => ImageResource::collection($this->images)
-
         ];
     }
 }

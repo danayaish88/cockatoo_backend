@@ -25,6 +25,7 @@ class StoryApiController extends Controller
         $story->city =  $request->input('city');
         $story->country =  $request->input('country');
         $story->points = $request->input('points');
+        $story->dateCreated = $request->input('dateCreated');
         $user->stories()->save($story);
 
         foreach($request->input('images') as $image)

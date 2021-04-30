@@ -20,6 +20,7 @@ class CreateStoriesTable extends Migration
             $table->json('points');
             $table->string('city');
             $table->string('country');
+            $table->timestamp('dateCreated');
             $table->timestamps();
         });
     }
