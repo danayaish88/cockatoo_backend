@@ -18,3 +18,4 @@ mix.js('resources/js/app.js', 'public/js').postCss('resources/css/app.css', 'pub
 ]);
 
 mix.sass('resources/sass/stories.scss', 'public/css');
+mix.js('resources/js/leafletMap.js', 'public/js');

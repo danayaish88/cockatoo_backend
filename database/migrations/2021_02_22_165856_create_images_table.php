@@ -15,8 +15,8 @@ class CreateImagesTable extends Migration
     {
         Schema::create('images', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->foreignId('story_id');
-            $table->text('description');
+            $table->foreignId('story_id')->onDelete('cascade')->onUpdate('cascade');
+            $table->text('description')->nullable();
             $table->string('url');
             $table->double('lat');
             $table->double('lan');

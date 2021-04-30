@@ -78,8 +78,12 @@ input:focus {
   margin: 0;
 }
 
-.vertical-scrollable {
+.col-md-8 {
   height: 100%;
+}
+
+.vertical-scrollable {
+  height: 70%;
   overflow-y: scroll;
 }
 
@@ -119,4 +123,8 @@ input:focus {
 hr {
   margin: 5px auto;
   width: 60%;
+}
+
+#mapid {
+  height: 500px;
 }
