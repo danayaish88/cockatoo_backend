@@ -65,6 +65,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('user/cultures', [CultureApiController::class, 'store']);
     Route::get('/user/stories', [StoryApiController::class, 'index']);
     Route::post('user/save-story', [StoryApiController::class, 'store']);
+    Route::delete('user/delete-story/{id}', [StoryApiController::class, 'destroy']);
 
 
     Route::post('/auth/logout', [AuthController::class, 'logout']);

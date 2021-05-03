@@ -43,4 +43,18 @@ class StoryApiController extends Controller
             'success' => true,
         ]);
     }
+
+    public function destroy(Request $request, $id){
+        $story = Story::where('id', $id)->first();
+        if($story != null){
+            $story->delete();
+            return json_encode( [
+                'success' => true,
+            ]);
+        }
+        return json_encode( [
+            'success' => false,
+        ]);
+    
+    }
 }

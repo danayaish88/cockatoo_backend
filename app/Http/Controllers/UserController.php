@@ -25,7 +25,7 @@ class UserController extends Controller
         }
 
        //$request->session()->put('user', $user);
-        return redirect('user/stories')->header('Cache-Control', 'no-store, no-cache, must-revalidate');
+        return redirect('/stories-view')->header('Cache-Control', 'no-store, no-cache, must-revalidate');
     }
 
     public function logout(){

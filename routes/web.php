@@ -9,6 +9,7 @@ use App\Http\Controllers\NatureController;
 use App\Http\Controllers\CuisineController;
 use App\Http\Controllers\CultureController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\StoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,9 +34,19 @@ Route::get('/user/logout',[UserController::class, 'logout']);
 
 Auth::routes();
 
-Route::get('/user/stories', function () {
-    return view('user_views.stories');
-})->middleware(['auth'])->name('stories');
+Route::middleware(['auth'])->group( function(){
+
+    Route::get('/all-stories', [StoryController::class, 'index']);
+
+    Route::get('/stories-view', function () {
+        return view('user_views.stories');
+    });
+
+});
+
+
+
+
 
 
 /*Route::middleware(['auth'])->group( function(){
