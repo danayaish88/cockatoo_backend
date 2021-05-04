@@ -24,12 +24,22 @@ $(function () {
         var imageUrl = story.images[0].url.split('/');
         imageUrl = 'http://localhost/' + imageUrl[3] + '/' + imageUrl[4];
         listOfStories.push(story);
-        $stories.append("  \n                <div class=\"story-drawer story-drawer--onhover\" id=" + story.id + ">\n                <img src=\"" + imageUrl + "\" alt=\"Story photo\" class=\"profile-image\">\n                    <div class=\"text\">\n                        <h6>" + story.name + "</h6>\n                    </div>\n                    <span class=\"time text-muted small\">" + story.dateCreated + "</span>\n                </div>\n                <hr>");
+        $stories.append("  \n                <div class=\"story-drawer story-drawer--onhover\" id=" + story.id + ">\n                <img src=\"" + imageUrl + "\" alt=\"Story photo\" class=\"profile-image\">\n                    <div class=\"text\">\n                        <h6>" + story.name + "</h6>\n                        <span class=\"time text-muted small\">" + story.dateCreated + "</span>\n                    </div>\n                    <i class=\"material-icons start-animation\">play_circle</i>\n                </div>\n                <hr>");
       });
       setListenerForStories();
+      setAnimationListeners();
     }
   });
 });
+
+function setAnimationListeners() {
+  var x = document.getElementsByClassName("start-animation");
+  var i;
+
+  for (i = 0; i < x.length; i++) {
+    x[i].addEventListener("click", displayAnimation);
+  }
+}
 
 function setListenerForStories() {
   var x = document.getElementsByClassName("story-drawer");
@@ -40,7 +50,18 @@ function setListenerForStories() {
   }
 }
 
+function setOtherStoriesToWhite() {
+  var x = document.getElementsByClassName("story-drawer");
+  var i;
+
+  for (i = 0; i < x.length; i++) {
+    x[i].className = 'story-drawer story-drawer--onhover';
+  }
+}
+
 function displayRoute() {
+  setOtherStoriesToWhite();
+  this.className = 'story-drawer story-drawer active';
   var listOfPoints = [];
   var i;
   var story;
@@ -64,7 +85,7 @@ function displayRoute() {
 
   clearMap();
   clearMarkers();
-  mymap.panTo(new L.LatLng(listOfPoints[0][0], listOfPoints[0][1]));
+  mymap.flyTo([listOfPoints[0][0], listOfPoints[0][1]], 13);
   drawRoute(listOfPoints);
   putImagesMarkers(story.images);
 }

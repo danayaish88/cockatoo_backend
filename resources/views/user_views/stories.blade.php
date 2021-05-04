@@ -28,8 +28,7 @@
                     <img class= "profile-image"src="{{url('/images/piza3.jpg')}}" alt="Profile image">
                 <span class = "settings-tray--right float-right">
                     <i class="material-icons">cached</i>
-                    <i class="material-icons">message</i>
-                    <i class="material-icons">menu</i>
+                    <i class="material-icons">logout</i>
                 </span>
                 </div>
                 <div class="search-box">

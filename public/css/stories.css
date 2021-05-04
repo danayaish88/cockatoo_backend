@@ -113,16 +113,43 @@ input:focus {
   color: grey;
 }
 .story-drawer--onhover:hover {
-  background: #74b9ff;
+  background: #eee;
   cursor: pointer;
 }
-.story-drawer--onhover:hover p, .story-drawer--onhover:hover h6, .story-drawer--onhover:hover .time {
-  color: #fff;
+.story-drawer i {
+  margin-top: 15px;
+  font-size: 30px;
+  color: grey;
+  margin-left: 14px;
+  transition: 0.3s;
+}
+.story-drawer i:hover {
+  color: orange;
+  cursor: pointer;
+}
+
+.active {
+  background: #74b9ff;
 }
 
 hr {
   margin: 5px auto;
   width: 60%;
+}
+
+.btn {
+  background-color: transparent;
+  height: 30px;
+  width: 30px;
+  border: none;
+  color: orange;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 6px 2px;
+  vertical-align: middle;
 }
 
 #mapid {

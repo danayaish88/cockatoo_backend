@@ -33,15 +33,25 @@ $(function (){
                 <img src="` + imageUrl + `" alt="Story photo" class="profile-image">
                     <div class="text">
                         <h6>` + story.name + `</h6>
+                        <span class="time text-muted small">` + story.dateCreated + `</span>
                     </div>
-                    <span class="time text-muted small">` + story.dateCreated + `</span>
+                    <i class="material-icons start-animation">play_circle</i>
                 </div>
                 <hr>`);
             },)
             setListenerForStories();
+            setAnimationListeners();
         }
     });
 });
+
+function setAnimationListeners(){
+    var x = document.getElementsByClassName("start-animation");
+    var i;
+    for (i = 0; i < x.length; i++) {
+        x[i].addEventListener("click", displayAnimation)
+    }
+}
 
 function setListenerForStories(){
     var x = document.getElementsByClassName("story-drawer");
@@ -51,7 +61,19 @@ function setListenerForStories(){
     )
 }}
 
+function setOtherStoriesToWhite(){
+    var x = document.getElementsByClassName("story-drawer");
+    var i;
+    for (i = 0; i < x.length; i++) {
+        x[i].className= 'story-drawer story-drawer--onhover';
+    }
+}
+
+
+
 function displayRoute(){
+    setOtherStoriesToWhite();
+    this.className =  'story-drawer story-drawer active';
     var listOfPoints = [];
     var i;
     var story;
@@ -74,7 +96,7 @@ function displayRoute(){
     clearMap();
     clearMarkers();
 
-    mymap.panTo(new L.LatLng(listOfPoints[0][0], listOfPoints[0][1]));
+    mymap.flyTo([listOfPoints[0][0], listOfPoints[0][1]], 13);
 
     drawRoute(listOfPoints);
     putImagesMarkers(story.images);

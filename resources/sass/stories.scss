@@ -124,13 +124,27 @@ input{
     }
 
     &--onhover:hover{
-        background: $blue;
+        background:  #eee;
         cursor: pointer;
+    }
 
-        p,h6,.time{
-            color: #fff;
+    i{
+        margin-top: 15px;
+        font-size: 30px;
+        color: grey;
+        margin-left: 14px;
+        transition: 0.3s;
+
+        &:hover{
+            color: orange;
+            cursor: pointer;
         }
     }
+}
+
+.active{
+    background:  $blue;
+
 }
 
 hr{
@@ -138,5 +152,20 @@ hr{
     width: 60%;
 
 }
+
+.btn {
+  background-color: transparent;
+  height: 30px;
+  width: 30px;
+  border: none;
+  color: orange;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 6px 2px;
+  vertical-align: middle;
+  }
 
 #mapid { height: 500px; }
