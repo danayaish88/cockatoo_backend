@@ -17,7 +17,6 @@ class CreateUsersTable extends Migration
             $table->bigIncrements('id');
             $table->string('email')->unique();
             $table->string('name');
-            $table->string('api_token', 60)->unique();                //for security 
             $table->string('password');
             $table->json('location')->nullable();
             $table->string('country')->nullable();

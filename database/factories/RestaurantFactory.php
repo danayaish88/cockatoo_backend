@@ -27,7 +27,7 @@ class RestaurantFactory extends Factory
             'city' => $this->faker->city,
             'country' => $this->faker->country,
             'rating' => $this->faker->numberBetween(1, 5),
-            'image'=>$this->faker->image
+            //'image'=>$this->faker->image
             
         ];
     }

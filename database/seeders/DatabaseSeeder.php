@@ -29,6 +29,7 @@ class DatabaseSeeder extends Seeder
          */
 
          //restaurant_user pivot table
+         
          $restaurants = \App\Models\Restaurant::all();
          \App\Models\User::all()->each(function ($user) use ($restaurants) { 
             $user->restaurants()->attach(

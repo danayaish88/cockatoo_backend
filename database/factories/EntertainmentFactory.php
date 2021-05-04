@@ -28,7 +28,7 @@ class EntertainmentFactory extends Factory
             'country' => $this->faker->country,
             'rating' => $this->faker->numberBetween(1, 5),
             'source'=>$this->faker->randomElement(['google','foursquare']),
-            'image'=>$this->faker->image
+            //'image'=>$this->faker->image
 
         ];
     }

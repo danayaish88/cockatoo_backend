@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Http\Controllers\Api\BaseApiController;
+use App\Models\Entertainment;
+use App\Models\Restaurant;
 
 
 class UserDataController extends BaseApiController
@@ -73,17 +75,23 @@ class UserDataController extends BaseApiController
     public function addEntertainmentBookmark( Request $request)
     {
         $user = User::find($request->user()->id);
+        $entertainment = Entertainment::find($request->id);
+        if($entertainment == null){
+            $entertainment = new Entertainment;
+            $entertainment->id = $request->input('id');
+            $entertainment->name = $request->input('name');
+            $entertainment->city =  $request->input('city');
+            $entertainment->country =  $request->input('country');
+            $entertainment->source = $request->input('source');
+            $entertainment->image = $request->input('image');
+            $entertainment->rating = $request->input('rating');
+            $entertainment->save();
+            $user->entertainments()->attach($entertainment);
+        }else{
+            $user->entertainments()->attach($entertainment);
+        }
 
-        $userEntertainment = new Story;
-        $story->name = $request->input('name');
-        $story->city =  $request->input('city');
-        $story->country =  $request->input('country');
-        $story->points = $request->input('points');
-        $story->dateCreated = $request->input('dateCreated');
-        $user->stories()->save($story);
-
-        $user->entertainments()->sync($request->entertainment);
-
+    
         return json_encode( [
             'success' => true,
         ]);
@@ -93,7 +101,21 @@ class UserDataController extends BaseApiController
     public function addRestaurantBookmark( Request $request)
     {
         $user = User::find($request->user()->id);
-        $user->restaurants()->sync($request->restaurant);
+        $restaurant = Restaurant::find($request->id);
+        if($restaurant == null){
+            $restaurant = new Restaurant;
+            $restaurant->id = $request->input('id');
+            $restaurant->name = $request->input('name');
+            $restaurant->city =  $request->input('city');
+            $restaurant->country =  $request->input('country');
+            $restaurant->image = $request->input('image');
+            $restaurant->rating = $request->input('rating');
+            $restaurant->save();
+            $user->restaurants()->attach($restaurant);
+        }else{
+            $user->restaurants()->attach($restaurant);
+        }
+       
 
         return json_encode( [
             'success' => true,
