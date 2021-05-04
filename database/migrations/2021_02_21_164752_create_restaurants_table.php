@@ -14,16 +14,12 @@ class CreateRestaurantsTable extends Migration
     public function up()
     {
         Schema::create('restaurants', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->string('id')->primary();
             $table->string('name');
             $table->string('city');
             $table->string('country');
-            $table->json('location');
             $table->double('rating',2,1)->nullable();
-            $table->string('link')->nullable();
-            $table->text('details')->nullable();
-            $table->string('type')->nullable();
-            $table->json('image_id')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
         });
     }

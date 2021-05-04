@@ -22,18 +22,14 @@ class EntertainmentFactory extends Factory
     public function definition()
     {
         return [
+            'id'=>$this->faker->unique()->name,
             'name' => $this->faker->name,
             'city' => $this->faker->city,
             'country' => $this->faker->country,
-            'location' => json_encode([
-                "latitude" => $this->faker->latitude(),
-                'longitude' => $this->faker->longitude()
-            ]),
-            'rating' => $this->faker->numberBetween(1, 9),
-            'link' => $this->faker->url(),
-            'details' => $this->faker->paragraph(),
-            'type' => $this->faker->randomElement(['zoo', 'museum', 'opera', 'art gallery']),
-            
+            'rating' => $this->faker->numberBetween(1, 5),
+            'source'=>$this->faker->randomElement(['google','foursquare']),
+            'image'=>$this->faker->image
+
         ];
     }
 }

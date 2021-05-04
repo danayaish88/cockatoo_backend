@@ -8,14 +8,17 @@ use Illuminate\Database\Eloquent\Model;
 class Restaurant extends Model
 {
     use HasFactory;
+    protected $primaryKey = 'id';
+    protected $keyType = 'string';
 
     protected $fillable = [
-        'name', 'city', 'country', 'location',
-        'rating', 'link', 'details', 'type', 'image_id'
+        'id',
+        'name', 'city', 'country',
+        'rating', 'image'
     ];
 
     public function users(){
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'restaurant_id');
     }
 
     public function cuisines(){

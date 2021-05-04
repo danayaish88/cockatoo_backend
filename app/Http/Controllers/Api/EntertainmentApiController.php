@@ -18,4 +18,5 @@ class EntertainmentApiController extends Controller
         return Entertainment::find($id);
     }
 
+
 }

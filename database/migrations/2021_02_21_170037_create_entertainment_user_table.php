@@ -15,13 +15,13 @@ class CreateEntertainmentUserTable extends Migration
     {
         Schema::create('entertainment_user', function (Blueprint $table) {
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('entertainment_id');
+            $table->string('entertainment_id');
             $table->foreign('user_id')
                           ->references('id')->on('users')
                           ->onDelete('cascade')->onUpdate('cascade')->UNSIGNED;
             $table->foreign('entertainment_id')
                           ->references('id')->on('entertainments')
-                          ->onDelete('cascade')->onUpdate('cascade')->UNSIGNED;
+                          ;
 
             $table->primary(['user_id', 'entertainment_id']);
             
