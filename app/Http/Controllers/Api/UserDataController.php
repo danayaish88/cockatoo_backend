@@ -52,4 +52,76 @@ class UserDataController extends BaseApiController
             ]); 
     }
 
+    public function returnUserEntertainment( Request $request)
+    {
+        $user = User::find($request->user()->id);
+        return $this->sendResponse([
+            'entertainments' => $user->entertainments         
+        ]);
+
+    }
+
+    public function returnUserRestaurant( Request $request)
+    {
+        $user = User::find($request->user()->id);
+        return $this->sendResponse([
+            'restaurants' => $user->restaurants         
+        ]);
+    }
+
+
+    public function addEntertainmentBookmark( Request $request)
+    {
+        $user = User::find($request->user()->id);
+
+        $userEntertainment = new Story;
+        $story->name = $request->input('name');
+        $story->city =  $request->input('city');
+        $story->country =  $request->input('country');
+        $story->points = $request->input('points');
+        $story->dateCreated = $request->input('dateCreated');
+        $user->stories()->save($story);
+
+        $user->entertainments()->sync($request->entertainment);
+
+        return json_encode( [
+            'success' => true,
+        ]);
+
+    }
+
+    public function addRestaurantBookmark( Request $request)
+    {
+        $user = User::find($request->user()->id);
+        $user->restaurants()->sync($request->restaurant);
+
+        return json_encode( [
+            'success' => true,
+        ]);
+
+    }
+
+
+    public function deleteBookmarkEntertainments(Request $request , $id){
+        $user = User::find($request->user()->id);
+        $user->entertainments()->where('entertainment_id',$id)->delete();
+
+        return json_encode( [
+            'success' => true,
+        ]);
+
+    }
+
+
+
+    public function deleteBookmarkRestaurants(Request $request , $id){
+        $user = User::find($request->user()->id);
+        $user->restaurants()->where('restaurant_id',$id)->delete();
+
+        return json_encode( [
+            'success' => true,
+        ]);
+
+    }
+
 }

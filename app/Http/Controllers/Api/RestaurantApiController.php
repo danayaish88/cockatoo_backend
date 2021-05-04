@@ -13,4 +13,9 @@ class RestaurantApiController extends Controller
         $restaurants = Restaurant::with('cuisines')->paginate();
         return RestaurantResource::collection($restaurants);
     }
+
+    public function show($id){
+        return Restaurant::find($id);
+    }
+
 }

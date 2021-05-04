@@ -65,7 +65,19 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('user/cultures', [CultureApiController::class, 'store']);
     Route::get('/user/stories', [StoryApiController::class, 'index']);
     Route::post('user/save-story', [StoryApiController::class, 'store']);
+<<<<<<< HEAD
+    Route::post('user/save-story', [StoryApiController::class, 'store']);
+    Route::get('user/entertainments/', [UserDataController::class, 'returnUserEntertainment']);
+    Route::get('user/restaurants/', [UserDataController::class, 'returnUserRestaurant']);
+    Route::get('user/restaurants/', [UserDataController::class, 'returnUserRestaurant']);
+    Route::get('user/restaurants/', [UserDataController::class, 'returnUserRestaurant']);
+    Route::get('user/restaurants/', [UserDataController::class, 'returnUserRestaurant']);
+    Route::get('user/restaurants/', [UserDataController::class, 'returnUserRestaurant']);
+    Route::post('user/add-restaurant-bookmark', [UserDataController::class, 'addEntertainmentBookmark']);
+    Route::post('user/add-entertainment-bookmark', [UserDataController::class, 'addRestaurantBookmark']);
+=======
     Route::delete('user/delete-story/{id}', [StoryApiController::class, 'destroy']);
+>>>>>>> 5113ff292b4a17d08e9b29c50a45a41e0004dbbd
 
 
     Route::post('/auth/logout', [AuthController::class, 'logout']);
