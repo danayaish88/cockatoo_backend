@@ -15,14 +15,14 @@ class CreateCuisineRestaurantTable extends Migration
     {
         Schema::create('cuisine_restaurant', function (Blueprint $table) {
             $table->string('cuisine_name');
-            $table->string('restaurant_id');
+            $table->string('key');
             $table->foreign('cuisine_name')
                           ->references('name')->on('cuisines')
                           ->onDelete('cascade')->onUpdate('cascade');
-            $table->foreign('restaurant_id')
-                          ->references('id')->on('restaurants')
+            $table->foreign('key')
+                          ->references('key')->on('restaurants')
                           ->onDelete('cascade')->onUpdate('cascade');
-            $table->primary(['cuisine_name', 'restaurant_id']);
+            $table->primary(['cuisine_name', 'key']);
             $table->timestamps();
         });
     }

@@ -23,8 +23,8 @@ use App\Http\Controllers\StoryController;
 */
 
 
-Route::view('/', 'welcome');
-Route::view('/user/login-view', 'user_views.login');
+//Route::view('/', 'welcome');
+Route::view('/', 'user_views.login');
 
 Route::post('/user/login', [UserController::class, 'login']);
 
@@ -41,6 +41,8 @@ Route::middleware(['auth'])->group( function(){
     Route::get('/stories-view', function () {
         return view('user_views.stories');
     });
+
+    Route::post('/share-story/{id}', [StoryController::class, 'index']);
 
 });
 

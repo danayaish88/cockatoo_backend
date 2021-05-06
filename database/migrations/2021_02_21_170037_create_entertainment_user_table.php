@@ -21,7 +21,7 @@ class CreateEntertainmentUserTable extends Migration
                           ->onDelete('cascade')->onUpdate('cascade')->UNSIGNED;
             $table->foreign('entertainment_id')
                           ->references('id')->on('entertainments')
-                          ;
+                          ->onDelete('cascade')->onUpdate('cascade');
 
             $table->primary(['user_id', 'entertainment_id']);
             

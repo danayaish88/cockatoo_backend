@@ -32,6 +32,6 @@ class UserController extends Controller
         if(session()->has('user')){
             session()->pull('user');
         }
-        return redirect('user/login-view');
+        return redirect('/');
     }
 }

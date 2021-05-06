@@ -15,7 +15,8 @@ class Story extends Model
         'city',
         'country',
         'points',
-        'dateCreated'
+        'dateCreated',
+        'shared'
     ];
 
     protected $casts = [

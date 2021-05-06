@@ -30,12 +30,12 @@ class DatabaseSeeder extends Seeder
 
          //restaurant_user pivot table
          
-         $restaurants = \App\Models\Restaurant::all();
+         /*$restaurants = \App\Models\Restaurant::all();
          \App\Models\User::all()->each(function ($user) use ($restaurants) { 
             $user->restaurants()->attach(
                 $restaurants->random(rand(1, 3))->pluck('id')->toArray()
             ); 
-        });
+        });*/
 
         //sight_user pivot table
         $sights = \App\Models\Sight::all();

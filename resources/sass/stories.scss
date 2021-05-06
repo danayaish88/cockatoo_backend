@@ -130,7 +130,7 @@ input{
 
     i{
         margin-top: 15px;
-        font-size: 30px;
+        font-size: 28px;
         color: grey;
         margin-left: 14px;
         transition: 0.3s;
@@ -144,6 +144,7 @@ input{
 
 .active{
     background:  $blue;
+    cursor: pointer;
 
 }
 
@@ -153,19 +154,45 @@ hr{
 
 }
 
-.btn {
-  background-color: transparent;
-  height: 30px;
-  width: 30px;
-  border: none;
-  color: orange;
-  padding: 20px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 6px 2px;
-  vertical-align: middle;
-  }
+/*.btn {
+    background-color: transparent;
+    height: 30px;
+    width: 30px;
+    border: none;
+    color: orange;
+    padding: 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 6px 2px;
+    vertical-align: middle;
+    }
+*/
+
+.btn-orange{
+    background-color: orange;
+    color: white;
+    border: none;
+
+    &:hover{
+        background-color: rgb(255, 123, 0);
+        cursor: pointer;
+        color: white;
+
+    }
+
+    &:active, &:focus{
+        background-color: orange;
+        border: none;
+        color: white;
+    }
+}
 
 #mapid { height: 500px; }
+
+
+.w-100 {
+    width: 100% !important;
+    height: 90vh;
+  }

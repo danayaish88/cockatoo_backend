@@ -22,7 +22,7 @@ class RestaurantFactory extends Factory
     public function definition()
     {
         return [
-            'id'=>$this->faker->unique()->name,
+            'key'=>$this->faker->unique()->name,
             'name' => $this->faker->name,
             'city' => $this->faker->city,
             'country' => $this->faker->country,

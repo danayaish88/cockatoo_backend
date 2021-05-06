@@ -21,6 +21,7 @@ class CreateStoriesTable extends Migration
             $table->string('city');
             $table->string('country');
             $table->timestamp('dateCreated');
+            $table->boolean('shared')->default(false);
             $table->timestamps();
         });
     }

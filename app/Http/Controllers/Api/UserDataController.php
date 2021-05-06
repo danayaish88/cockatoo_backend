@@ -77,21 +77,19 @@ class UserDataController extends BaseApiController
         $user = User::find($request->user()->id);
         $entertainment = Entertainment::find($request->id);
         if($entertainment == null){
-            $entertainment = new Entertainment;
-            $entertainment->id = $request->input('id');
-            $entertainment->name = $request->input('name');
-            $entertainment->city =  $request->input('city');
-            $entertainment->country =  $request->input('country');
-            $entertainment->source = $request->input('source');
-            $entertainment->image = $request->input('image');
-            $entertainment->rating = $request->input('rating');
+            $entertainment = new Entertainment();
+            $entertainment->id = $request->id;
+            $entertainment->name = $request->name;
+            $entertainment->city =  $request->city;
+            $entertainment->country =  $request->country;
+            $entertainment->source = $request->source;
+            $entertainment->image = $request->image;
+            $entertainment->rating = $request->rating;
             $entertainment->save();
-            $user->entertainments()->attach($entertainment);
-        }else{
-            $user->entertainments()->attach($entertainment);
         }
 
-    
+        $user->entertainments()->attach($entertainment);
+
         return json_encode( [
             'success' => true,
         ]);
@@ -101,16 +99,17 @@ class UserDataController extends BaseApiController
     public function addRestaurantBookmark( Request $request)
     {
         $user = User::find($request->user()->id);
-        $restaurant = Restaurant::find($request->id);
+        $restaurant = Restaurant::find($request->key);
         if($restaurant == null){
-            $restaurant = new Restaurant;
-            $restaurant->id = $request->input('id');
-            $restaurant->name = $request->input('name');
-            $restaurant->city =  $request->input('city');
-            $restaurant->country =  $request->input('country');
-            $restaurant->image = $request->input('image');
-            $restaurant->rating = $request->input('rating');
+            $restaurant = new Restaurant();
+            $restaurant->key = $request->key;
+            $restaurant->name = $request->name;
+            $restaurant->city = $request->city;
+            $restaurant->country = $request->country;
+            $restaurant->rating = $request->rating;
+            $restaurant->image = $request->image;
             $restaurant->save();
+
             $user->restaurants()->attach($restaurant);
         }else{
             $user->restaurants()->attach($restaurant);
@@ -138,7 +137,7 @@ class UserDataController extends BaseApiController
 
     public function deleteBookmarkRestaurants(Request $request , $id){
         $user = User::find($request->user()->id);
-        $user->restaurants()->where('restaurant_id',$id)->delete();
+        $user->restaurants()->where('key',$id)->delete();
 
         return json_encode( [
             'success' => true,

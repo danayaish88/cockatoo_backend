@@ -8,20 +8,23 @@ use Illuminate\Database\Eloquent\Model;
 class Restaurant extends Model
 {
     use HasFactory;
-    protected $primaryKey = 'id';
+    
+
+    protected $primaryKey = 'key'; // or null
+    public $incrementing = false;
     protected $keyType = 'string';
 
     protected $fillable = [
-        'id',
+        'key',
         'name', 'city', 'country',
         'rating', 'image'
     ];
 
     public function users(){
-        return $this->belongsToMany(User::class, 'restaurant_id');
+        return $this->belongsToMany(User::class, 'key');
     }
 
     public function cuisines(){
-        return $this->belongsToMany(Cuisine::class, 'cuisine_restaurant', 'restaurant_id', 'cuisine_name');
+        return $this->belongsToMany(Cuisine::class, 'cuisine_restaurant', 'key', 'cuisine_name');
     }
 }

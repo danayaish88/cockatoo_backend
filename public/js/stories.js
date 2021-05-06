@@ -4,6 +4,8 @@ var __webpack_exports__ = {};
   !*** ./resources/js/stories.js ***!
   \*********************************/
 var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+var audio = new Audio('/audio/Giant Moon – Vendredi.mp3');
+var selectedStoryId;
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGFuYXlhaXNoIiwiYSI6ImNrbzRvaWJrdDBkcGUyeG15eDUyNjRzNTMifQ.riYivZLTd9Px0dM6fo-AIA', {
   attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
   maxZoom: 18,
@@ -12,8 +14,16 @@ L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_toke
   zoomOffset: -1,
   accessToken: 'your.mapbox.access.token'
 }).addTo(mymap);
+$('.carousel').carousel({
+  interval: 2500
+});
 var listOfStories = [];
 var markers = new Array();
+$('#exampleModalCenter').on('hidden.bs.modal', function () {
+  audio.pause();
+});
+var btn = document.getElementById("share-story");
+btn.addEventListener("click", shareStory);
 $(function () {
   var $stories = $('#stories');
   $.ajax({
@@ -24,25 +34,87 @@ $(function () {
         var imageUrl = story.images[0].url.split('/');
         imageUrl = 'http://localhost/' + imageUrl[3] + '/' + imageUrl[4];
         listOfStories.push(story);
-        $stories.append("  \n                <div class=\"story-drawer story-drawer--onhover\" id=" + story.id + ">\n                <img src=\"" + imageUrl + "\" alt=\"Story photo\" class=\"profile-image\">\n                    <div class=\"text\">\n                        <h6>" + story.name + "</h6>\n                        <span class=\"time text-muted small\">" + story.dateCreated + "</span>\n                    </div>\n                    <i class=\"material-icons start-animation\">play_circle</i>\n                </div>\n                <hr>");
+        $stories.append("  \n                <div class=\"story-drawer story-drawer--onhover\" id=" + story.id + ">\n                <img src=\"" + imageUrl + "\" alt=\"Story photo\" class=\"profile-image\">\n                    <div class=\"text\">\n                        <h6>" + story.name + "</h6>\n                        <span class=\"time text-muted small\">" + story.dateCreated + "</span>\n                    </div>\n                    <i class=\"material-icons share-story-id\" data-toggle=\"modal\" data-target=\"#areUSureModal\">ios_share</i>\n                    <i class=\"material-icons start-animation\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\">play_circle</i>\n                    </div>\n                <hr>");
       });
       setListenerForStories();
       setAnimationListeners();
+      setSelectedStoryIdListener();
     }
   });
 });
+
+function setStoryId() {
+  selectedStoryId = this.parentElement.id;
+}
+
+function setSelectedStoryIdListener() {
+  var x = document.getElementsByClassName("share-story-id");
+  var i;
+
+  for (i = 0; i < x.length; i++) {
+    x[i].addEventListener("click", setStoryId);
+  }
+}
+
+function shareStory() {
+  $.ajax({
+    url: '/share-story/' + selectedStoryId,
+    type: 'POST',
+    success: function success(data) {
+      console.log(data);
+    }
+  });
+}
+
+function displayCarousel() {
+  var story;
+  var i;
+  var $carousel = $('#carousel-inner');
+  $("#carousel-inner").empty();
+  $(".carousel").on("mouseenter", function () {
+    $(this).carousel('cycle');
+  }).on("mouseleave", function () {
+    $(this).carousel('cycle');
+  });
+
+  for (i = 0; i < listOfStories.length; i++) {
+    if (this.parentElement.id == listOfStories[i].id) {
+      story = listOfStories[i];
+      break;
+    }
+  }
+
+  listOfImages = story.images;
+
+  for (i = 0; i < listOfImages.length; i++) {
+    var imageUrl = listOfImages[i].url.split('/');
+    imageUrl = 'http://localhost/' + imageUrl[3] + '/' + imageUrl[4];
+
+    if (i == 0) {
+      $carousel.append("\n            <div class=\"carousel-item active\">\n                <img class=\"d-block w-100\" src=\"" + imageUrl + "\" alt=\"First slide\">\n                <div class=\"carousel-caption d-none d-md-block\">\n                    <p>" + listOfImages[i].description + "</p>\n                </div>\n            </div>");
+    } else {
+      $carousel.append("\n            <div class=\"carousel-item\">\n                <img class=\"d-block w-100\" src=\"" + imageUrl + "\" alt=\"First slide\">\n                <div class=\"carousel-caption d-none d-md-block\">\n                    <p>" + listOfImages[i].description + "</p>\n                </div>\n            </div>");
+    }
+  }
+
+  playAudio();
+}
+
+function playAudio() {
+  audio.play();
+}
 
 function setAnimationListeners() {
   var x = document.getElementsByClassName("start-animation");
   var i;
 
   for (i = 0; i < x.length; i++) {
-    x[i].addEventListener("click", displayAnimation);
+    x[i].addEventListener("click", displayCarousel);
   }
 }
 
 function setListenerForStories() {
-  var x = document.getElementsByClassName("story-drawer");
+  var x = document.getElementsByClassName("text");
   var i;
 
   for (i = 0; i < x.length; i++) {
@@ -61,13 +133,13 @@ function setOtherStoriesToWhite() {
 
 function displayRoute() {
   setOtherStoriesToWhite();
-  this.className = 'story-drawer story-drawer active';
+  this.parentElement.className = 'story-drawer story-drawer active';
   var listOfPoints = [];
   var i;
   var story;
 
   for (i = 0; i < listOfStories.length; i++) {
-    if (this.id == listOfStories[i].id) {
+    if (this.parentElement.id == listOfStories[i].id) {
       story = listOfStories[i];
       break;
     }
@@ -91,7 +163,7 @@ function displayRoute() {
 }
 
 function drawRoute(listOfPoints) {
-  var polygon = L.polygon(listOfPoints).addTo(mymap);
+  var polyline = L.polyline(listOfPoints).addTo(mymap);
 }
 
 function putImagesMarkers(images) {

@@ -13,4 +13,19 @@ class StoryController extends Controller
         $stories = Story::where('user_id', Auth::id())->get();
         return StoryResource::collection($stories);
     }
+
+    public function shareStory(Request $request, $id){
+        $userId = Auth::id();
+        $story = Story::where([
+            'user_id' => $userId,
+            'id' => $id
+        ]);
+        if($story != null){
+            $story->shared = true;
+            $story->save();
+            return 'success';
+        }else{
+            return 'failure';
+        }
+    }
 }
