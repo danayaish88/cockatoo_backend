@@ -125,7 +125,7 @@ class UserDataController extends BaseApiController
 
     public function deleteBookmarkEntertainments(Request $request , $id){
         $user = User::find($request->user()->id);
-        $user->entertainments()->where('entertainment_id',$id)->delete();
+        $user->entertainments()->detach($id);
 
         return json_encode( [
             'success' => true,
@@ -137,7 +137,7 @@ class UserDataController extends BaseApiController
 
     public function deleteBookmarkRestaurants(Request $request , $id){
         $user = User::find($request->user()->id);
-        $user->restaurants()->where('key',$id)->delete();
+        $user->restaurants()->detach($id);
 
         return json_encode( [
             'success' => true,

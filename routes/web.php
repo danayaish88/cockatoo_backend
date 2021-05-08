@@ -31,7 +31,6 @@ Route::post('/user/login', [UserController::class, 'login']);
 Route::get('/user/logout',[UserController::class, 'logout']);
 
 
-
 Auth::routes();
 
 Route::middleware(['auth'])->group( function(){
@@ -42,7 +41,7 @@ Route::middleware(['auth'])->group( function(){
         return view('user_views.stories');
     });
 
-    Route::post('/share-story/{id}', [StoryController::class, 'index']);
+    Route::post('/share-story/{id}', [StoryController::class, 'shareStory']);
 
 });
 
