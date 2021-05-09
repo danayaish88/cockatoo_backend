@@ -20,7 +20,7 @@ class Entertainment extends Model
     ];
 
     public function users(){
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class, 'entertainment_user', 'user_id', 'entertainment_id');
     }
 
 

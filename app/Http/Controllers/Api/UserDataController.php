@@ -54,6 +54,8 @@ class UserDataController extends BaseApiController
             ]); 
     }
 
+    
+
     public function returnUserEntertainment( Request $request)
     {
         $user = User::find($request->user()->id);
@@ -123,9 +125,9 @@ class UserDataController extends BaseApiController
     }
 
 
-    public function deleteBookmarkEntertainments(Request $request , $id){
+    public function deleteBookmarkEntertainments(Request $request  , $id){
         $user = User::find($request->user()->id);
-        $user->entertainments()->where('entertainment_id',$id)->delete();
+        $user->entertainments()->detach($id);
 
         return json_encode( [
             'success' => true,
@@ -137,12 +139,34 @@ class UserDataController extends BaseApiController
 
     public function deleteBookmarkRestaurants(Request $request , $id){
         $user = User::find($request->user()->id);
-        $user->restaurants()->where('key',$id)->delete();
+        $user->restaurants()->detach($id);
 
         return json_encode( [
             'success' => true,
         ]);
 
     }
+
+    public function findEntertainmentBookmark(Request $request ){
+        $user = User::find($request->user()->id);
+        $isExists=$user->entertainments()->where('entertainment_id',$request->id)->exists();
+
+        return json_encode( [
+            'success' => $isExists,
+        ]);
+
+    }
+
+    public function findRestaurantBookmark(Request $request ){
+        $user = User::find($request->user()->id);
+        $isExists=$user->restaurants()->where('restaurant_id',$id)->exists();
+
+        return json_encode( [
+            'success' => $isExists,
+        ]);
+
+    }
+
+
 
 }
