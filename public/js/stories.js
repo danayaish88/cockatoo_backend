@@ -5,7 +5,7 @@ var __webpack_exports__ = {};
   \*********************************/
 var mymap = L.map('mapid').setView([51.505, -0.09], 13);
 var audio = new Audio('/audio/Giant Moon – Vendredi.mp3');
-var selectedStoryId;
+var selectedStoryId = 0;
 L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoiZGFuYXlhaXNoIiwiYSI6ImNrbzRvaWJrdDBkcGUyeG15eDUyNjRzNTMifQ.riYivZLTd9Px0dM6fo-AIA', {
   attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
   maxZoom: 18,
@@ -34,7 +34,7 @@ $(function () {
         var imageUrl = story.images[0].url.split('/');
         imageUrl = 'http://localhost/' + imageUrl[3] + '/' + imageUrl[4];
         listOfStories.push(story);
-        $stories.append("  \n                <div class=\"story-drawer story-drawer--onhover\" id=" + story.id + ">\n                <img src=\"" + imageUrl + "\" alt=\"Story photo\" class=\"profile-image\">\n                    <div class=\"text\">\n                        <h6>" + story.name + "</h6>\n                        <span class=\"time text-muted small\">" + story.dateCreated + "</span>\n                    </div>\n                    <i class=\"material-icons share-story-id\" data-toggle=\"modal\" data-target=\"#areUSureModal\">ios_share</i>\n                    <i class=\"material-icons start-animation\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\">play_circle</i>\n                    </div>\n                <hr>");
+        $stories.append("  \n                <div class=\"story-drawer story-drawer--onhover\" id=" + story.id + ">\n                    <img src=\"" + imageUrl + "\" alt=\"Story photo\" class=\"profile-image\">\n                    <div class=\"text\">\n                        <h6>" + story.name + "</h6>\n                        <span class=\"time text-muted small\">" + story.dateCreated + "</span>\n                    </div>\n                    <i class=\"material-icons share-story-id\" data-toggle=\"modal\" data-target=\"#areUSureModal\">ios_share</i>\n                    <i class=\"material-icons start-animation\" data-toggle=\"modal\" data-target=\"#exampleModalCenter\">play_circle</i>\n                </div>\n                <hr>");
       });
       setListenerForStories();
       setAnimationListeners();
@@ -57,11 +57,20 @@ function setSelectedStoryIdListener() {
 }
 
 function shareStory() {
+  var url = '/share-story/' + selectedStoryId;
   $.ajax({
-    url: '/share-story/' + selectedStoryId,
+    url: url,
     type: 'POST',
+    headers: {
+      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    },
     success: function success(data) {
       console.log(data);
+    },
+    error: function error(XMLHttpRequest, textStatus, errorThrown) {
+      console.log(XMLHttpRequest.statusText);
+      console.log(textStatus);
+      console.log(errorThrown);
     }
   });
 }
