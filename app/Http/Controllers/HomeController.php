@@ -23,6 +23,20 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        return view('user_views.stories');
     }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+
+    public function adminHome()
+
+    {
+        return view('admin.home');
+    }
+
+    
 }

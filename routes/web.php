@@ -29,7 +29,7 @@ use App\Http\Controllers\HomeController;
 //Route::view('/', 'welcome');
 Route::view('/', 'user_views.login')->name('userLogin');
 
-Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/user/login', [LoginController::class, 'login'])->name('login-user');
 
 Route::get('/get-story/{id}', [StoryController::class, 'getStory']);
 Route::get('/get-story-id/{id}', [StoryController::class, 'getStoryId']);
