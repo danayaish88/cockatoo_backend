@@ -8,6 +8,8 @@ body{
     text-rendering: optimizeLegibility;
 }
 
+
+
 .container{
     margin: 60px auto;
     background: #fff;
@@ -23,24 +25,7 @@ body{
 }
 
 
-.settings-tray{
-    background: $grey;
-    padding: 10px 15px;
-    border-radius: 7px;
 
-     i{
-        margin-top: 10px;
-        font-size: 25px;
-        color: grey;
-        margin-left: 14px;
-        transition: 0.3s;
-
-        &:hover{
-            color: $blue;
-            cursor: pointer;
-        }
-    }
-}
 
 .search-box{
     background: #fafafa;
@@ -142,6 +127,7 @@ input{
     }
 }
 
+
 .active{
     background:  $blue;
     cursor: pointer;
@@ -174,7 +160,10 @@ hr{
     background-color: orange;
     color: white;
     border: none;
-
+    border-radius: 5;
+    i{
+        margin-top: 0;
+    }
     &:hover{
         background-color: rgb(255, 123, 0);
         cursor: pointer;
@@ -195,4 +184,13 @@ hr{
 .w-100 {
     width: 100% !important;
     height: 90vh;
+  }
+
+
+  #refreshButton {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    padding: 10px;
+    z-index: 500;
   }

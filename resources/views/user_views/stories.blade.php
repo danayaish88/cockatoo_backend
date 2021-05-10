@@ -31,7 +31,15 @@
                     <img class= "profile-image"src="{{url('/images/piza3.jpg')}}" alt="Profile image">
                 <span class = "settings-tray--right float-right">
                     <i class="material-icons">cached</i>
-                    <i class="material-icons">logout</i>
+
+                    <a href="{{ route('logout-user')}}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                        <i class="material-icons" id="logoutIcon">logout</i>
+                     </a>
+                    <form id="logout-form" action="{{ route('logout-user') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </span>
                 </div>
                 <div class="search-box">
@@ -84,6 +92,8 @@
             </div>
         </div>
     </div>
+
+    
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
