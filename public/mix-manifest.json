@@ -2,6 +2,8 @@
     "/js/app.js": "/js/app.js",
     "/js/leafletMap.js": "/js/leafletMap.js",
     "/js/stories.js": "/js/stories.js",
+    "/js/shared-story.js": "/js/shared-story.js",
     "/css/app.css": "/css/app.css",
+    "/css/shared-story.css": "/css/shared-story.css",
     "/css/stories.css": "/css/stories.css"
 }

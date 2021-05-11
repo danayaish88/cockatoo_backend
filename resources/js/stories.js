@@ -27,7 +27,6 @@ var btn = document.getElementById("share-story");
 btn.addEventListener("click", shareStory);
 
 
-
 $(function (){
     var $stories = $('#stories');
     $.ajax({
@@ -76,11 +75,10 @@ function shareStory(){
     $.ajax({
         url: url,
         type: 'POST',
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        },
+        
         success: function(data){
-          console.log(data);
+            var urlSharedStory = "http://127.0.0.1:8000/get-story-id/" + selectedStoryId;
+            window.location.href = urlSharedStory;
         },
         error: function(XMLHttpRequest, textStatus, errorThrown) {
             console.log(XMLHttpRequest.statusText);

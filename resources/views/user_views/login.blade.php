@@ -74,7 +74,7 @@
                 <div class="col-lg-7 px-5 pt-5">
                     <h1 class="font-weight-bold py-3">Logo</h1>
                     <h4>Sign in</h4>
-                    <form action="{{route('login')}}" method= "post">
+                    <form action="{{route('login-user')}}" method= "post">
                     @csrf
                         <div class="form-row">
                             <div class="col-lg-7 mt-2 mb-3">

@@ -61,11 +61,9 @@ function shareStory() {
   $.ajax({
     url: url,
     type: 'POST',
-    headers: {
-      'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-    },
     success: function success(data) {
-      console.log(data);
+      var urlSharedStory = "http://127.0.0.1:8000/get-story-id/" + selectedStoryId;
+      window.location.href = urlSharedStory;
     },
     error: function error(XMLHttpRequest, textStatus, errorThrown) {
       console.log(XMLHttpRequest.statusText);

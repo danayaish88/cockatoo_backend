@@ -10,6 +10,9 @@ use App\Http\Controllers\CuisineController;
 use App\Http\Controllers\CultureController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\StoryController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\HomeController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -24,14 +27,17 @@ use App\Http\Controllers\StoryController;
 
 
 //Route::view('/', 'welcome');
-Route::view('/', 'user_views.login');
+Route::view('/', 'user_views.login')->name('userLogin');
 
-Route::post('/user/login', [UserController::class, 'login']);
+Route::post('/user/login', [LoginController::class, 'login'])->name('login-user');
 
-Route::get('/user/logout',[UserController::class, 'logout']);
+Route::get('/get-story/{id}', [StoryController::class, 'getStory']);
+Route::get('/get-story-id/{id}', [StoryController::class, 'getStoryId']);
+
+Route::view('shared-story', 'user_views.shared_story')->name('shared-story-view');
 
 
-Auth::routes();
+//Auth::routes();
 
 Route::middleware(['auth'])->group( function(){
 
@@ -39,13 +45,28 @@ Route::middleware(['auth'])->group( function(){
 
     Route::get('/stories-view', function () {
         return view('user_views.stories');
-    });
+    })->name('userHome');
 
     Route::post('/share-story/{id}', [StoryController::class, 'shareStory']);
+    Route::post('/logout-user', [UserController::class, 'logout'])->name('logout-user');
 
 });
 
+/*Route::prefix('/admin')->name('admin.')->namespace('Admin')->group(function(){
+    Route::middleware(['admin'])->group(function(){
+        
+        //Login Routes
+        Route::get('/login',[LoginController::class,'showLoginForm'])->name('login');
+        Route::post('/login',[LoginController::class, 'login']);
+        Route::post('/logout',[LoginController::class, 'logout'])->name('logout');
+        Route::view('/dashborad', 'admin.home')->name('dashboard');
+    
+    });
+  });
+*/
 
+Route::get('dashborad', [HomeController::class, 'adminHome'])->name('admin.home')->middleware('is_admin');
+ 
 
 
 
