@@ -101,10 +101,10 @@ class UserDataController extends BaseApiController
     public function addRestaurantBookmark( Request $request)
     {
         $user = User::find($request->user()->id);
-        $restaurant = Restaurant::find($request->key);
+        $restaurant = Restaurant::find($request->id);
         if($restaurant == null){
             $restaurant = new Restaurant();
-            $restaurant->key = $request->key;
+            $restaurant->id = $request->id;
             $restaurant->name = $request->name;
             $restaurant->city = $request->city;
             $restaurant->country = $request->country;
@@ -159,7 +159,7 @@ class UserDataController extends BaseApiController
 
     public function findRestaurantBookmark(Request $request ){
         $user = User::find($request->user()->id);
-        $isExists=$user->restaurants()->where('restaurant_id',$id)->exists();
+        $isExists=$user->restaurants()->where('restaurant_id',$request->id)->exists();
 
         return json_encode( [
             'success' => $isExists,

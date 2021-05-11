@@ -76,6 +76,8 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     
     Route::delete('user/delete-entertainment-bookmark/{id}', [UserDataController::Class, 'deleteBookmarkEntertainments']);
     Route::delete('user/delete-restaurant-bookmark/{id}', [UserDataController::Class, 'deleteBookmarkRestaurants']);
+    Route::get('user/find-restaurant-bookmark/', [UserDataController::class, 'findRestaurantBookmark']);
+
     Route::post('/auth/logout', [AuthController::class, 'logout']);
 });
 

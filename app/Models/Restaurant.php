@@ -10,21 +10,21 @@ class Restaurant extends Model
     use HasFactory;
     
 
-    protected $primaryKey = 'key'; // or null
+    protected $primaryKey = 'id'; // or null
     public $incrementing = false;
     protected $keyType = 'string';
 
     protected $fillable = [
-        'key',
+        'id',
         'name', 'city', 'country',
         'rating', 'image'
     ];
 
     public function users(){
-        return $this->belongsToMany(User::class, 'key');
+        return $this->belongsToMany(User::class, 'id');
     }
 
     public function cuisines(){
-        return $this->belongsToMany(Cuisine::class, 'cuisine_restaurant', 'key', 'cuisine_name');
+        return $this->belongsToMany(Cuisine::class, 'cuisine_restaurant', 'id', 'cuisine_name');
     }
 }

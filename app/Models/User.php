@@ -62,7 +62,7 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
     Bookmarks
     */
     public function restaurants(){
-        return $this->belongsToMany(Restaurant::class, 'restaurant_user', 'user_id', 'key');
+        return $this->belongsToMany(Restaurant::class, 'restaurant_user', 'user_id', 'restaurant_id');
     }
 
     public function sights(){
