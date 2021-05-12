@@ -10,7 +10,7 @@ use App\Http\Resources\RestaurantResource;
 class RestaurantApiController extends Controller
 {
     public function index(){
-        $restaurants = Restaurant::with('cuisines')->paginate();
+        $restaurants = Restaurant::all();
         return RestaurantResource::collection($restaurants);
     }
 

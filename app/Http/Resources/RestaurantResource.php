@@ -20,12 +20,7 @@ class RestaurantResource extends JsonResource
             'city' => $this->city,
             'country' => $this->country,
             'rating' => $this->rating,
-            'descprition' => $this->details,
-            'location' => $this->location,
-            'link' => $this->link,
-            'image_id' => $this->image_id,
-            'type' => $this->type,
-            'cuisines' => CuisineResource::collection($this->cuisines)
+            'image' => $this->image,
         ];
     }
 }
