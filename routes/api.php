@@ -70,8 +70,14 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('user/restaurants/', [UserDataController::class, 'returnUserRestaurant']);
     Route::post('user/add-restaurant-bookmark', [UserDataController::class, 'addRestaurantBookmark']);
     Route::post('user/add-entertainment-bookmark', [UserDataController::class, 'addEntertainmentBookmark']);
+    Route::delete('user/delete-entertainment-bookmark/{id}', [UserDataController::class, 'deleteBookmarkEntertainments']);
+    Route::delete('user/delete-restaurant-bookmark/{id}', [UserDataController::class, 'deleteBookmarkRestaurants']);
+    Route::get('user/find-entertainment-bookmark/', [UserDataController::class, 'findEntertainmentBookmark']);
+    
     Route::delete('user/delete-entertainment-bookmark/{id}', [UserDataController::Class, 'deleteBookmarkEntertainments']);
     Route::delete('user/delete-restaurant-bookmark/{id}', [UserDataController::Class, 'deleteBookmarkRestaurants']);
+    Route::get('user/find-restaurant-bookmark/', [UserDataController::class, 'findRestaurantBookmark']);
+
     Route::post('/auth/logout', [AuthController::class, 'logout']);
 });
 
