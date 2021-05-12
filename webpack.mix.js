@@ -23,3 +23,4 @@ mix.sass('resources/sass/shared-story.scss', 'public/css');
 mix.js('resources/js/leafletMap.js', 'public/js');
 mix.js('resources/js/stories.js', 'public/js');
 mix.js('resources/js/shared-story.js', 'public/js');
+mix.js('resources/js/dashboard.js', 'public/js');
