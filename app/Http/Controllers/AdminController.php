@@ -10,7 +10,6 @@ use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\DB;
 
 
-
 class AdminController extends Controller
 {
     public function getCountOfUsers(){
