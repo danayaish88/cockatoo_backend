@@ -218,9 +218,16 @@ body{
 
 .details .recentOrders{
     position: relative;
-    min-height: 530px;
+    min-height: 500px;
     background: #fff;
     padding: 20px;
+    align-items: center;
+}
+
+.details .recentOrders div{
+    width: 400px;
+    height: 400px;
+    margin: 20px auto;
 }
 
 .cardHeader{
@@ -376,7 +383,7 @@ line-height: 1.2rem;
         grid-template-columns: repeat(1, 1fr);
     }
 
-    .details .recentOrders table{
+    .details .recentOrders canvas{
         width: 600px;
     }
 }

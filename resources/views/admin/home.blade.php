@@ -10,6 +10,9 @@
     
     <link rel="stylesheet" type="text/css" href="{{ asset('css/admin.css') }}">
 
+        <!-- ajax -->
+        <meta name="csrf-token" content="{{ csrf_token() }}" />
+
       <!-- material icons-->
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
@@ -37,14 +40,19 @@
                 <li>
                     <a href="">
                         <span class="icon"><span class="material-icons">people</span></span>
-                        <span class="title">Customers</span>
+                        <span class="title">Users</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{ route('logout-user')}}"
+                                       onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
                         <span class="icon"><span class="material-icons">logout</span></span>
                         <span class="title">Logout</span>
                     </a>
+                    <form id="logout-form" action="{{ route('logout-user') }}" method="POST" class="d-none">
+                        @csrf
+                    </form>
                 </li>
             </ul>
         </div>
@@ -98,46 +106,13 @@
             </div>
             <div class="details">
                 <div class="recentOrders">
-                    <div class="cardHeader">
-                        <h2>Recent Orders</h2>
-                        <a href="#" class="btn">View All</a>
+                    <div>
+                        <canvas id="myChart" width="200" height: "100"></canvas>
                     </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <td>Name</td>
-                                <td>Price</td>
-                                <td>Payment</td>
-                                <td>Status</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Dana</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status delievered">Delieverd</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Dana</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status delievered">Delieverd</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Dana</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status delievered">Delieverd</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
                 </div>
                 <div class="recentCustomers">
                     <div class="cardHeader">
-                        <h2>Recent Customers</h2>
+                        <h2>Recent Users</h2>
                     </div>
                     <table>
                         <tbody id="recentUsers">
@@ -163,6 +138,10 @@
                             </tr>
                         </tbody>
                     </table>
+                    <br>
+                    <div class="cardHeader">
+                        <h2>Most popular places</h2>
+                    </div>
                 </div>
             </div>
         </div> 
@@ -178,9 +157,11 @@
                main.classList.toggle('active');
            }
        </script>
+
+       
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.bundle.js" charset="utf-8"></script>
         <script src="{{ mix('/js/dashboard.js') }}"></script>
 
 </body>

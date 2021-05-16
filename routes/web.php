@@ -53,7 +53,7 @@ Route::middleware(['auth'])->group( function(){
     Route::post('/logout-user', [UserController::class, 'logout'])->name('logout-user');
 
 });
-
+Route::get('get-popular-places', [AdminController::class, 'getPopularPlaces']);
 
 
 Route::middleware(['is_admin'])->group( function(){
@@ -61,8 +61,10 @@ Route::middleware(['is_admin'])->group( function(){
     Route::get('users-count', [AdminController::class, 'getCountOfUsers']);
     Route::get('stories-count', [AdminController::class, 'getCountOfStories']);
     Route::get('images-count', [AdminController::class, 'getCountOfImages']);
-    //Route::get('bookmark-count', [AdminController::class, 'getCountOfBookmarks']);
+    Route::get('bookmarks-count', [AdminController::class, 'getCountOfBookmarks']);
     Route::get('last-five-users', [AdminController::class, 'lastFiveUsers']);
+    Route::get('get-countries', [AdminController::class, 'getCountriesPercentage']);
+    Route::post('/logout-user', [UserController::class, 'logout'])->name('logout-user');
 
 });
 

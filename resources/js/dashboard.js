@@ -52,6 +52,23 @@ $(function (){
     });
 });
 
+$(function (){
+    var $bookmarks = $('#bookmarks');
+    $("#bookmarks").empty();
+    $.ajax({
+        type:'GET',
+        url: '/bookmarks-count',
+        success: function(count){
+            $bookmarks.append(`
+                    <div id="bookmarks">
+                        <div class="numbers">` + count + `</div>
+                        <div class="cardName">Bookmarks</div>
+                    </div>
+            `);
+        }
+    });
+});
+
 
 $(function (){
     var $recentUsers = $('#recentUsers');
@@ -72,3 +89,43 @@ $(function (){
         }
     });
 });
+
+$(function (){
+    var ctx = document.getElementById('myChart').getContext('2d');
+    $.ajax({
+        type:'GET',
+        url: '/get-countries',
+        success: function(result){
+            var labels = [];
+            var data = [];
+            var colors = [];
+            $.each(result, function(i, country){
+                labels.push(country.country);
+                data.push(country.count);
+                colors.push(getRandomColor());
+            })
+            
+            var myChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: labels,
+                      datasets: [{
+                        label: 'Users distribution',
+                        data: data,
+                        hoverOffset: 4,
+                        backgroundColor: colors,
+                      }]
+                }
+            });
+        }
+    });
+});
+
+function getRandomColor() {
+    var letters = '0123456789ABCDEF'.split('');
+    var color = '#';
+    for (var i = 0; i < 6; i++ ) {
+        color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+}
