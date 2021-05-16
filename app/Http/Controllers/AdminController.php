@@ -8,7 +8,6 @@ use App\Models\Story;
 use App\Models\Image;
 use App\Http\Resources\UserResource;
 
-
 class AdminController extends Controller
 {
     public function getCountOfUsers(){
@@ -30,4 +29,6 @@ class AdminController extends Controller
         $users = User::orderBy('id', 'desc')->take(5)->get();
         return UserResource::collection($users);
     }
+
+    )
 }

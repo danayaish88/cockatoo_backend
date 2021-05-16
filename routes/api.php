@@ -10,7 +10,7 @@ use App\Http\Controllers\Api\SightApiController;
 use App\Http\Controllers\Api\EntertainmentApiController;
 use App\Http\Controllers\Api\PlaceApiController;
 use App\Http\Controllers\Api\UserDataController;
-use App\Http\Controllers\Auth\AdminController;
+use App\models\Restaurant;
 
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
@@ -50,6 +50,8 @@ Route::get('entertainments/{id}', [EntertainmentApiController::class, 'show']);
 
 Route::get('hotels', [PlaceApiController::class, 'indexHotels']);
 
+Route::get('find-all-restaurants-bookmark/', [RestaurantApiController::class, 'index']);
+Route::get('find-all-restaurants-user-bookmark/', [RestaurantApiController::class, 'getPivot']);
 
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::get('/user', function(Request $request) {
@@ -79,8 +81,6 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::delete('user/delete-restaurant-bookmark/{id}', [UserDataController::Class, 'deleteBookmarkRestaurants']);
     Route::get('user/find-restaurant-bookmark/', [UserDataController::class, 'findRestaurantBookmark']);
 
-    Route::get('find-all-restaurants-bookmark/', [RestaurantApiController::class, 'index']);
-    Route::get('find-all-restaurants-user-bookmark/', [AdminController::class, 'getPivot']);
 
     Route::post('/auth/logout', [AuthController::class, 'logout']);
 });
