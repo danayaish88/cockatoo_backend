@@ -21,8 +21,8 @@ class CreateCuisineRestaurantTable extends Migration
                           ->onDelete('cascade')->onUpdate('cascade');
             $table->foreign('restaurant_id')
                           ->references('id')->on('restaurants')
-                          ->onDelete('cascade')->onUpdate('cascade');
-            $table->primary(['cuisine_name', 'id']);
+                          ->onDelete('cascade')->onUpdate('cascade')->string;
+            $table->primary(['cuisine_name', 'restaurant_id']);
             $table->timestamps();
         });
     }

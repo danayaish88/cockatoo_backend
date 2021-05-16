@@ -21,7 +21,4 @@ class Cuisine extends Model
         return $this->belongsToMany(User::class, 'cuisine_user', 'cuisine_name', 'user_id');
     }
 
-    public function restaurants(){
-        return $this->belongsToMany(Restaurant::class, 'cuisine_restaurant', 'cuisine_name', 'key');
-    }
 }
