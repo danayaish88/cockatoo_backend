@@ -24,11 +24,4 @@ class CultureApiController extends BaseApiController
             CultureResource::collection($user->cultures)
         ); 
     }
-
-    public function getCulturesForUser(Request $request){
-        $user = User::find($request->user()->id);
-        return $this->sendResponse(
-            CultureResource::collection($user->cultures)
-        ); 
-    }
 }

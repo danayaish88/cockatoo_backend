@@ -67,9 +67,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('user/cuisines', [CuisineApiController::class, 'store']);
     Route::post('user/natures', [NatureApiController::class, 'store']);
     Route::post('user/cultures', [CultureApiController::class, 'store']);
-    Route::get('user/get/cuisines', [CuisineApiController::class, 'getCuisinesForUser']);
-    Route::get('user/get/natures', [NatureApiController::class, 'getNaturesForUser']);
-    Route::get('user/get/cultures', [CultureApiController::class, 'getCulturesForUser']);
+    Route::get('user/get/interests', [UserDataController::class, 'getInterests']);
     Route::get('/user/stories', [StoryApiController::class, 'index']);
     Route::post('user/save-story', [StoryApiController::class, 'store']);
     Route::delete('user/delete-story/{id}', [StoryApiController::class, 'destroy']);

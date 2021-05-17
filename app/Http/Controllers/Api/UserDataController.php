@@ -8,6 +8,9 @@ use App\Models\User;
 use App\Http\Controllers\Api\BaseApiController;
 use App\Models\Entertainment;
 use App\Models\Restaurant;
+use App\Http\Resources\NatureResource;
+use App\Http\Resources\CultureResource;
+use App\Http\Resources\CuisineResource;
 
 
 class UserDataController extends BaseApiController
@@ -157,7 +160,7 @@ class UserDataController extends BaseApiController
 
     }
 
-    public function findRestaurantBookmark(Request $request ){
+    public function findRestaurantBookmark(Request $request){
         $user = User::find($request->user()->id);
         $isExists=$user->restaurants()->where('restaurant_id',$request->id)->exists();
 
@@ -167,6 +170,21 @@ class UserDataController extends BaseApiController
 
     }
 
+    public function getInterests(Request $request){
+        $user = User::find($request->user()->id);
+        $natures = $user->natures;
+        $cultures = $user->cultures;
+        $cuisines = $user->cuisines;
 
+        $response = [
+            'success' => true,
+            'data'    => [
+                NatureResource::collection($natures),
+                CultureResource::collection($user->cultures),
+                CuisineResource::collection($user->cuisines)
+            ]
+        ];
 
+        return json_encode($response);
+    }
 }
