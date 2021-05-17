@@ -28,7 +28,7 @@
         <div class="row no-gutters">
             <div class="col-md-4 ">
                 <div class="settings-tray">
-                    <img class= "profile-image"src="{{url('/images/piza3.jpg')}}" alt="Profile image">
+                    <img class= "profile-image"src="{{url('/images/logo.jpg')}}" alt="Profile image">
                 <span class = "settings-tray--right float-right">
                     <i class="material-icons">cached</i>
 

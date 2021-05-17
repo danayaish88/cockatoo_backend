@@ -55,7 +55,7 @@ $(function () {
     url: '/last-five-users',
     success: function success(data) {
       $.each(data.data, function (i, user) {
-        $recentUsers.append(" \n                    <tr>\n                        <td width=\"60px\"> <div class=\"imgBx\"><img src=\"http://127.0.0.1:8000/images/piza3.jpg\"></div></td>\n                        <td><h4>" + user.name + "<br><span>" + user.country + "</span></h4></td>\n                    </tr> \n                ");
+        $recentUsers.append(" \n                    <tr>\n                        <td width=\"60px\"> <div class=\"imgBx\"><img src=\"http://127.0.0.1:8000/images/logo.jpg\"></div></td>\n                        <td><h4>" + user.name + "<br><span>" + user.country + "</span></h4></td>\n                    </tr> \n                ");
       });
     }
   });

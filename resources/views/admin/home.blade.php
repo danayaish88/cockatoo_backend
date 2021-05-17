@@ -67,7 +67,7 @@
                     </label>
                 </div>
                 <div class="user">
-                        <img src="{{url('/images/piza3.jpg')}}">
+                        <img src="{{url('/images/logo.jpg')}}">
                 </div>
             </div>
 
@@ -117,31 +117,28 @@
                     <table>
                         <tbody id="recentUsers">
                             <tr>
-                                <td width="60px"> <div class="imgBx"><img src="{{url('/images/piza3.jpg')}}"></div></td>
+                                <td width="60px"> <div class="imgBx"><img src="{{url('/images/logo.jpg')}}"></div></td>
                                 <td><h4>David<br><span>Italy</span></h4></td>
                             </tr>
                             <tr>
-                                <td width="60px"> <div class="imgBx"><img src="{{url('/images/piza3.jpg')}}"></div></td>
+                                <td width="60px"> <div class="imgBx"><img src="{{url('/images/logo.jpg')}}"></div></td>
                                 <td><h4>David<br><span>Italy</span></h4></td>
                             </tr>
                             <tr>
-                                <td width="60px"> <div class="imgBx"><img src="{{url('/images/piza3.jpg')}}"></div></td>
+                                <td width="60px"> <div class="imgBx"><img src="{{url('/images/logo.jpg')}}"></div></td>
                                 <td><h4>David<br><span>Italy</span></h4></td>
                             </tr>
                             <tr>
-                                <td width="60px"> <div class="imgBx"><img src="{{url('/images/piza3.jpg')}}"></div></td>
+                                <td width="60px"> <div class="imgBx"><img src="{{url('/images/logo.jpg')}}"></div></td>
                                 <td><h4>David<br><span>Italy</span></h4></td>
                             </tr>
                             <tr>
-                                <td width="60px"> <div class="imgBx"><img src="{{url('/images/piza3.jpg')}}"></div></td>
+                                <td width="60px"> <div class="imgBx"><img src="{{url('/images/logo.jpg')}}"></div></td>
                                 <td><h4>David<br><span>Italy</span></h4></td>
                             </tr>
                         </tbody>
                     </table>
                     <br>
-                    <div class="cardHeader">
-                        <h2>Most popular places</h2>
-                    </div>
                 </div>
             </div>
         </div> 

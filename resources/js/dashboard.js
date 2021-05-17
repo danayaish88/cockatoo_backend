@@ -81,7 +81,7 @@ $(function (){
                 
                 $recentUsers.append(` 
                     <tr>
-                        <td width="60px"> <div class="imgBx"><img src="http://127.0.0.1:8000/images/piza3.jpg"></div></td>
+                        <td width="60px"> <div class="imgBx"><img src="http://127.0.0.1:8000/images/logo.jpg"></div></td>
                         <td><h4>` + user.name + `<br><span>` +user.country + `</span></h4></td>
                     </tr> 
                 `);

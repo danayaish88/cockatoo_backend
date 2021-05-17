@@ -13,21 +13,23 @@ class UserController extends Controller
 {
     public function login(Request $request): string
     {
-        $request->validate([
+        $input = $request->all();
+   
+        $this->validate($request, [
             'email' => 'required|email',
             'password' => 'required',
         ]);
-
-        $user = User::where('email', $request->email)->first();
-
-        if (! $user || ! Hash::check($request->password, $user->password)) {
-            throw ValidationException::withMessages([
-                'email' => ['The provided credentials are incorrect.'],
-            ]);
+   
+        if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
+        {
+            if (auth()->user()->is_admin == 1) {
+                return redirect()->route('admin.home');
+            }else{
+                return redirect('/stories-view');
+            }
+        }else{
+            return redirect('/');
         }
-
-        return redirect('/stories-view')->header('Cache-Control', 'no-store, no-cache, must-revalidate');
-    
     }
 
     public function logout(Request $request){

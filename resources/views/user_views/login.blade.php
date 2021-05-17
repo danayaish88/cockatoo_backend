@@ -61,6 +61,12 @@
             border:1px solid rgba(245,113,78,255);
             box-shadow: 0 0 1px rgba(245,113,78,255);
         }
+        .profile-image{
+            margin-left: 100px;
+            width: 100px;
+            height: 100px;
+            border-radius: 50px;
+        }   
     </style>
   </head>
   <body>
@@ -72,7 +78,10 @@
                     <img src="{{url('/images/piza3.jpg')}}" class ="img-fluid" alt="">
                 </div>
                 <div class="col-lg-7 px-5 pt-5">
-                    <h1 class="font-weight-bold py-3">Logo</h1>
+                    <h1 class="font-weight-bold py-3">
+                        <div class="imgBx"><img class="profile-image" src="{{url('/images/logo.jpg')}}">
+                        </div>
+                    </h1>
                     <h4>Sign in</h4>
                     <form action="{{route('login-user')}}" method= "post">
                     @csrf

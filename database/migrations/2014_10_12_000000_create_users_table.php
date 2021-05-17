@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration
             $table->json('location')->nullable();
             $table->string('country')->nullable();
             $table->date('birthday')->nullable();
+            $table->boolean('is_admin')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->rememberToken();                    //when a user selects remember me when logging in 
             $table->timestamps();
