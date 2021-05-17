@@ -23,7 +23,7 @@ class UserController extends Controller
         if(auth()->attempt(array('email' => $input['email'], 'password' => $input['password'])))
         {
             if (auth()->user()->is_admin == 1) {
-                return redirect()->route('admin.home');
+                return redirect('/dashborad');
             }else{
                 return redirect('/stories-view');
             }
@@ -33,12 +33,16 @@ class UserController extends Controller
     }
 
     public function logout(Request $request){
-        Auth::guard('web')->logout();
+        Auth::logout();
 
         $request->session()->invalidate();
-
         $request->session()->regenerateToken();
 
         return redirect('/');
+    }
+
+    public function getName(Request $request){
+        $user = User::where('id', Auth::id())->first();
+        return $user->name;
     }
 }

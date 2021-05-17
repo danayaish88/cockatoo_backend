@@ -24,4 +24,11 @@ class NatureApiController extends BaseApiController
             NatureResource::collection($user->natures)
         ); 
     }
+
+    public function getNaturesForUser(Request $request){
+        $user = User::find($request->user()->id);
+        return $this->sendResponse(
+            NatureResource::collection($user->natures)
+        ); 
+    }
 }

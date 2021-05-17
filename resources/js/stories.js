@@ -26,6 +26,16 @@ $('#exampleModalCenter').on('hidden.bs.modal', function () {
 var btn = document.getElementById("share-story");
 btn.addEventListener("click", shareStory);
 
+$(function (){
+    var $name = $('#name');
+    $.ajax({
+        type:'GET',
+        url: '/get/name',
+        success: function(name){
+            $name.append(" " + name);
+        }
+    });
+});
 
 $(function (){
     var $stories = $('#stories');
@@ -75,7 +85,6 @@ function shareStory(){
     $.ajax({
         url: url,
         type: 'POST',
-        
         success: function(data){
             var urlSharedStory = "http://127.0.0.1:8000/get-story-id/" + selectedStoryId;
             window.location.href = urlSharedStory;

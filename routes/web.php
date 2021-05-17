@@ -41,15 +41,17 @@ Route::view('shared-story', 'user_views.shared_story')->name('shared-story-view'
 
 //Auth::routes();
 
+
 Route::middleware(['auth'])->group( function(){
 
     Route::get('/all-stories', [StoryController::class, 'index']);
+    Route::get('/get/name', [UserController::class, 'getName']);
+    Route::post('/share-story/{id}', [StoryController::class, 'shareStory']);
 
     Route::get('/stories-view', function () {
         return view('user_views.stories');
     })->name('userHome');
 
-    Route::post('/share-story/{id}', [StoryController::class, 'shareStory']);
     Route::post('/logout-user', [UserController::class, 'logout'])->name('logout-user');
 
 });

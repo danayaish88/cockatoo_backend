@@ -18,7 +18,7 @@ class StoryController extends Controller
         $userId = Auth::id();
         $story = Story::where('id', $id)
                         ->where('user_id', $userId)
-                        ->first();
+                        ->first();              
 
         if($story != null){
             $story->shared = true;
@@ -27,5 +27,19 @@ class StoryController extends Controller
         }else{
             return 'failure';
         }
+    }
+
+    public function getStory($id){
+        $story = Story::where('id', $id)
+                        ->get(); 
+        
+        if($story[0]->shared == 1){
+            return StoryResource::collection($story);
+        }
+        return null;
+    }
+
+    public function getStoryId($id){
+         return redirect('/shared-story?id='. $id);
     }
 }

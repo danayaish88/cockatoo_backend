@@ -189,10 +189,16 @@ hr{
     }
 }
 
-#mapid { height: 500px; }
+#mapid { height: 520px; }
 
 
 .w-100 {
     width: 100% !important;
     height: 90vh;
+  }
+
+  .name{
+      margin-left: 10px;
+      font-weight: 400;
+
   }

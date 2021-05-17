@@ -33,13 +33,13 @@ $(function () {
     type: 'GET',
     url: url,
     success: function success(res) {
-      var story = res.data;
-      var point;
+      var story = res.data[0];
+      console.log(story.city);
       listOfImages = story.images;
 
-      for (point in story.points) {
+      for (i in story.points) {
         var points = [];
-        var pointsString = story.points[point].split(', ');
+        var pointsString = story.points[i].split(', ');
         points[0] = parseFloat(pointsString[0]);
         points[1] = parseFloat(pointsString[1]);
         listOfPoints.push(points);

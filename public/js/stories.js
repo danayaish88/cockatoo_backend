@@ -25,6 +25,16 @@ $('#exampleModalCenter').on('hidden.bs.modal', function () {
 var btn = document.getElementById("share-story");
 btn.addEventListener("click", shareStory);
 $(function () {
+  var $name = $('#name');
+  $.ajax({
+    type: 'GET',
+    url: '/get/name',
+    success: function success(name) {
+      $name.append(" " + name);
+    }
+  });
+});
+$(function () {
   var $stories = $('#stories');
   $.ajax({
     type: 'GET',
