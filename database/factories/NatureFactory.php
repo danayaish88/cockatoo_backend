@@ -22,7 +22,7 @@ class NatureFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->unique()->randomElement(['beach', 'desert', 'mountains', 'wildlife'])
+            'name' => $this->faker->unique()->randomElement(['beach', 'desert', 'mountains', 'wildlife', 'river', 'forest'])
         ];
     }
 }

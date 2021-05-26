@@ -15,10 +15,10 @@ class DatabaseSeeder extends Seeder
     {
          \App\Models\User::factory(10)->create();
         //  \App\Models\Restaurant::factory(100)->create();
-         \App\Models\Cuisine::factory(5)->create();
-         \App\Models\Culture::factory(4)->create();
+         \App\Models\Cuisine::factory(14)->create();
+         \App\Models\Culture::factory(7)->create();
          \App\Models\Entertainment::factory(100)->create();
-         \App\Models\Nature::factory(4)->create();
+         \App\Models\Nature::factory(6)->create();
          \App\Models\Place::factory(100)->create();
          \App\Models\Sight::factory(100)->create();
          \App\Models\Sight::factory(100)->create();

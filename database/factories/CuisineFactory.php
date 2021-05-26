@@ -22,7 +22,7 @@ class CuisineFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->unique()->randomElement(['american', 'mexican', 'italian', 'indian', 'suchi', 'thai'])
+            'name' => $this->faker->unique()->randomElement(['american', 'mexican', 'italian', 'indian', 'suchi', 'thai', 'egyption', 'european', 'french', 'gluten free', 'labenese', 'mediterranean', 'pakistani', 'palestinian', 'vegetarian'])
         ];
     }
 }

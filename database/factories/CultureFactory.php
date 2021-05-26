@@ -22,7 +22,7 @@ class CultureFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->unique()->randomElement(['romanian', 'greek', 'old egyption', 'japanese'])
+            'name' => $this->faker->unique()->randomElement(['romanian', 'greek', 'old egyption', 'japanese', 'east asian', 'ottomans', 'scientific'])
         ];
     }
 }
