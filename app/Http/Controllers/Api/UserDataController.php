@@ -174,14 +174,12 @@ class UserDataController extends BaseApiController
         $user = User::find($request->user()->id);
         $natures = $user->natures;
         $cultures = $user->cultures;
-        $cuisines = $user->cuisines;
 
         $response = [
             'success' => true,
             'data'    => [
                 NatureResource::collection($natures),
                 CultureResource::collection($user->cultures),
-                CuisineResource::collection($user->cuisines)
             ]
         ];
 

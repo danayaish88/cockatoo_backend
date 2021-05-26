@@ -10,6 +10,8 @@ use App\Http\Controllers\Api\SightApiController;
 use App\Http\Controllers\Api\EntertainmentApiController;
 use App\Http\Controllers\Api\PlaceApiController;
 use App\Http\Controllers\Api\UserDataController;
+use App\Http\Controllers\Auth\CuisineController;
+
 use App\models\Restaurant;
 
 use App\Models\User;
@@ -68,6 +70,7 @@ Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('user/natures', [NatureApiController::class, 'store']);
     Route::post('user/cultures', [CultureApiController::class, 'store']);
     Route::get('user/get/interests', [UserDataController::class, 'getInterests']);
+    Route::get('user/get/cuisines', [CuisineApiController::class, 'getCuisinesForUser']);
     Route::get('/user/stories', [StoryApiController::class, 'index']);
     Route::post('user/save-story', [StoryApiController::class, 'store']);
     Route::delete('user/delete-story/{id}', [StoryApiController::class, 'destroy']);

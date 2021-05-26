@@ -20,4 +20,6 @@ class CuisineController extends Controller
         $cuisine->save();
         return redirect()->back()->with('message', 'cuisine added');
     }
+
+
 }

@@ -24,4 +24,11 @@ class CuisineApiController extends BaseApiController
             CuisineResource::collection($user->cuisines)
         ); 
     }
+    public function getCuisinesForUser(Request $request){
+        $user = User::find($request->user()->id);
+        return $this->sendResponse(
+            CuisineResource::collection($user->cuisines)
+        ); 
+    }
+
 }
